@@ -1,0 +1,17 @@
+.grass {
+    position: relative;
+    background-image: image-url('../img/objects/grassback.jpg');
+    background-color: transparent;
+    display: inline-block;
+    z-index: 0;
+    float: left;
+    
+    .grassPiece {
+        background-image: image-url('../img/objects/grass.png');
+        background-size: 30px;
+        background-color: transparent;
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+    }
+}

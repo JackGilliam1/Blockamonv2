@@ -24,13 +24,16 @@ router.post('/updateplayername', function(req, res) {
             res.end();
         });
 });
-      
+
 router.get('/getplayer\?:playerName', function(req, res) {
     var name = req.query.playerName;
     playerConnection.getPlayer(name, function(player) {
         if(player) {
             res.send({
-                name: player.name
+                name: player.name,
+                money: player.money,
+                position: player.position,
+                ownedBlockamon: player.ownedBlockamon
             });
         }
         res.end();

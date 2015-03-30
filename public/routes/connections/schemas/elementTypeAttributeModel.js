@@ -1,6 +1,6 @@
 var mongoose = require('mongoose'),
        elementTypeAttributeSchema = new mongoose.Schema({
-           elementType: String,
+           _id: String,
            strongAttack: [String],
            weakAttack: [String],
            strongDefense: [String],

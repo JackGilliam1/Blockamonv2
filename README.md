@@ -24,8 +24,12 @@ npm start
 - The website starts at url
 localhost:10001
 
-- debugger for the node server
+- Debugger for the node server
 node-inspector
 
-- the node inspector url
+- The node inspector url
 localhost:8080/debug?port=5858
+
+
+- To run the tests
+npm test

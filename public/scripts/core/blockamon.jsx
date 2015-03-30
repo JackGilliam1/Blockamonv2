@@ -37,7 +37,6 @@ define('blockamon', ['react', 'jquery'], function(React, $){
                     position: 'relative',
                     //left: '500px',
                     //top: '400px',
-                    zIndex: position.zIndex
                   },
                   blockamonImageStyle = {
                     transform: 'rotate(' + (this.state.position.rotation) + 'deg)'

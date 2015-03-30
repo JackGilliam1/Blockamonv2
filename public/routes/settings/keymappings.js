@@ -14,5 +14,8 @@ module.exports = {
     //68
     'd': 'right',
     //39
-    '\'': 'right'
+    '\'': 'right',
+    containsKey: function(keyCode) {
+        return this[String.fromCharCode(keyCode).toLowerCase()] !== undefined;
+    }
 };
