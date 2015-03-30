@@ -1,0 +1,21 @@
+
+body {
+    width: 99%;
+    height: 98%;
+    background: black;
+}
+
+#content {
+    position: relative;
+    left: 1%;
+    top: 1%;
+    width: 1000px;
+    height: 800px;
+
+    .gamearea {
+        width: 100%;
+        height: 100%;
+        border: 1px solid black;
+        background: whitesmoke;
+    }
+}

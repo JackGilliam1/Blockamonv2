@@ -1,0 +1,17 @@
+@import 'typecolors';
+
+.blockamon {
+    height: 30px;
+    width: 30px;
+    box-shadow: 0px 3px 1px -2px gray;
+    
+    @include typeColors();
+    
+    .blockamonimage {
+        height: 30px;
+        width: 30px;
+        display: inline-block;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+}
