@@ -1,6 +1,12 @@
 require('player.scss');
-define('player', ['react', 'jquery', './playerimage', './playernameedit'], function(React, $,
- PlayerImage, PlayerNameEdit) {
+define('player', [
+        'react',
+        'jquery',
+        './playerimage',
+        './playernameedit',
+        'keymappings'
+     ],
+function(React, $, PlayerImage, PlayerNameEdit, keyMappings) {
     return React.createClass({
         propTypes: {
            name: React.PropTypes.string.isRequired 
@@ -12,9 +18,56 @@ define('player', ['react', 'jquery', './playerimage', './playernameedit'], funct
         },
         getInitialState: function() {
             return {
+                ownedBlockamon: [],
                 position: { x: 0, y: 0, direction: 'none' },
                 isEditing: false
             };
+        },
+        keysPressed: {},
+        doKeyDown: function(e) {
+            if(this.state.isEditing) {
+                return;
+            }
+            if(keyMappings.containsKey(e.keyCode)) {
+                e.preventDefault();
+            }
+            else {
+                return;
+            }
+            this.keysPressed[e.keyCode] = true;
+            this.sendKeys(Object.keys(this.keysPressed));
+        },
+        doKeyUp: function(e) {
+            if(this.state.isEditing) {
+                return;s
+            }
+            delete this.keysPressed[e.keyCode];
+            if(!keyMappings.containsKey(e.keyCode)) {
+                return;
+            }
+            this.sendKeys(Object.keys(this.keysPressed));
+        },
+        sendKeys: function(keys) {
+            var self = this;
+            if(keys.length > 0) {
+                $.ajax({
+                    url: '/movement/buttonpushed',
+                    type: 'POST',
+                    data: {
+                        keys: keys,
+                        playerName: self.props.name
+                    },
+                    success: function(player) {
+                        self.setState({
+                            position: player.position
+                        });
+                        self.props.onMove(player);
+                    }
+                });
+            }
+        },
+        componentDidMount: function() {
+           $(document).keydown(this.doKeyDown).keyup(this.doKeyUp);
         },
         componentWillReceiveProps: function(nextProps) {
             var playerName = nextProps.name,
@@ -41,7 +94,7 @@ define('player', ['react', 'jquery', './playerimage', './playernameedit'], funct
             }
         },
         playerNameUpdated: function(oldName, newName) {
-           this.props.playerNameChanged(oldName, newName);
+           this.props.nameChanged(oldName, newName);
            this.setState({
                isEditing: false
            });

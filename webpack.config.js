@@ -13,7 +13,9 @@ module.exports = {
     },
     
     resolve: {
-            modulesDirectories: ['node_modules', 'scripts', 'scripts/core', 'styles', 'public'],
+            modulesDirectories: ['node_modules', 'scripts', 'scripts/core', 'styles', 
+                                            'public', 'public/settings', 'public/connections',
+                                            'schemas', 'settings'],
             extensions: ['', '.js', '.jsx', '.scss']
     }
 }

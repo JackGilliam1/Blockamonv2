@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "main": "server.js",
   "scripts": {
-    "start": "supervisor --force-watch --watch '.,public/routes,public/routes/settings' --debug server.js",
+    "start": "supervisor --force-watch --watch '.,public/routes,public/settings,public/connections' --debug server.js",
     "test": "jest",
     "webpack": "webpack"
   },

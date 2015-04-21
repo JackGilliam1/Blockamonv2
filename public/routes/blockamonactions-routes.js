@@ -3,7 +3,7 @@ var base = '/actions',
        router = express.Router(),
        creator = require('blockamoncreator'),
        damageCalculator = require('./calculators/damagecalculator'),
-       blockamonConnection = require('./connections/blockamonconnection');
+       blockamonConnection = require('blockamonconnection');
 
 router.post('/attack', function(req, res) {
         var attacker = req.body.attacker,

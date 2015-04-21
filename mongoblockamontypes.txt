@@ -1,0 +1,506 @@
+
+{
+    "ElementType" : "dark",
+    
+    "StrongAttack" : [ 
+        "ghost", 
+        "psychic"
+    ],
+    "WeakAttack" : [ 
+        "dark", 
+        "fairy", 
+        "fighting"
+    ],
+    "StrongDefense" : [ 
+        "dark", 
+        "ghost"
+    ],
+    "WeakDefense" : [ 
+        "bug", 
+        "fairy", 
+        "fighting"
+    ],
+    "ImmuneDefense" : [ 
+        "psychic"
+    ]
+}
+
+
+{
+    "ElementType" : "dragon",
+    
+    "StrongAttack" : [ 
+        "dragon"
+    ],
+    "WeakAttack" : [ 
+        "steel"
+    ],
+    "StrongDefense" : [ 
+        "electric", 
+        "fire", 
+        "grass", 
+        "water"
+    ],
+    "WeakDefense" : [ 
+        "dragon", 
+        "fairy", 
+        "ice"
+    ],
+    "ImmuneDefense" : []
+}
+
+
+{
+    "ElementType" : "electric",
+    
+    "StrongAttack" : [ 
+        "flying", 
+        "water"
+    ],
+    "WeakAttack" : [ 
+        "dragon", 
+        "electric", 
+        "grass"
+    ],
+    "StrongDefense" : [ 
+        "electric", 
+        "flying", 
+        "steel"
+    ],
+    "WeakDefense" : [ 
+        "ground"
+    ],
+    "ImmuneDefense" : []
+}
+
+
+{
+    "ElementType" : "fairy",
+    
+    "StrongAttack" : [ 
+        "dark", 
+        "dragon", 
+        "fighting"
+    ],
+    "WeakAttack" : [ 
+        "fire", 
+        "poison", 
+        "steel"
+    ],
+    "StrongDefense" : [ 
+        "bug", 
+        "dark", 
+        "fighting"
+    ],
+    "WeakDefense" : [ 
+        "poison", 
+        "steel"
+    ],
+    "ImmuneDefense" : [ 
+        "dragon"
+    ]
+}
+
+
+{
+    "ElementType" : "flying",
+    
+    "StrongAttack" : [ 
+        "bug", 
+        "fighting", 
+        "grass"
+    ],
+    "WeakAttack" : [ 
+        "electric", 
+        "rock", 
+        "steel"
+    ],
+    "StrongDefense" : [ 
+        "bug", 
+        "fighting", 
+        "grass"
+    ],
+    "WeakDefense" : [ 
+        "electric", 
+        "ice", 
+        "rock"
+    ],
+    "ImmuneDefense" : [ 
+        "ground"
+    ]
+}
+
+
+{
+    "ElementType" : "ghost",
+    
+    "StrongAttack" : [ 
+        "ghost", 
+        "psychic"
+    ],
+    "WeakAttack" : [ 
+        "dark"
+    ],
+    "StrongDefense" : [ 
+        "bug", 
+        "poison"
+    ],
+    "WeakDefense" : [ 
+        "dark", 
+        "ghost"
+    ],
+    "ImmuneDefense" : [ 
+        "fighting", 
+        "normal"
+    ]
+}
+
+
+{
+    "ElementType" : "ground",
+    
+    "StrongAttack" : [ 
+        "electric", 
+        "fire", 
+        "poison", 
+        "rock", 
+        "steel"
+    ],
+    "WeakAttack" : [ 
+        "bug", 
+        "grass"
+    ],
+    "StrongDefense" : [ 
+        "poison", 
+        "rock"
+    ],
+    "WeakDefense" : [ 
+        "grass", 
+        "ice", 
+        "water"
+    ],
+    "ImmuneDefense" : [ 
+        "electric"
+    ]
+}
+
+
+{
+    "ElementType" : "ice",
+    
+    "StrongAttack" : [ 
+        "dragon", 
+        "flying", 
+        "grass", 
+        "ground"
+    ],
+    "WeakAttack" : [ 
+        "fire", 
+        "ice", 
+        "steel", 
+        "water"
+    ],
+    "StrongDefense" : [ 
+        "ice"
+    ],
+    "WeakDefense" : [ 
+        "fighting", 
+        "fire", 
+        "rock", 
+        "steel"
+    ],
+    "ImmuneDefense" : []
+}
+
+
+{
+    "ElementType" : "poison",
+    
+    "StrongAttack" : [ 
+        "fairy", 
+        "grass"
+    ],
+    "WeakAttack" : [ 
+        "ghost", 
+        "ground", 
+        "poison", 
+        "rock"
+    ],
+    "StrongDefense" : [ 
+        "bug", 
+        "fairy", 
+        "fighting", 
+        "grass", 
+        "poison"
+    ],
+    "WeakDefense" : [ 
+        "ground", 
+        "psychic"
+    ],
+    "ImmuneDefense" : []
+}
+
+
+{
+    "ElementType" : "psychic",
+    
+    "StrongAttack" : [ 
+        "fighting", 
+        "poison"
+    ],
+    "WeakAttack" : [ 
+        "psychic", 
+        "steel"
+    ],
+    "StrongDefense" : [ 
+        "fighting", 
+        "psychic"
+    ],
+    "WeakDefense" : [ 
+        "bug", 
+        "dark", 
+        "ghost"
+    ],
+    "ImmuneDefense" : []
+}
+
+
+{
+    "ElementType" : "water",
+    
+    "StrongAttack" : [ 
+        "fire", 
+        "ground", 
+        "rock"
+    ],
+    "WeakAttack" : [ 
+        "dragon", 
+        "grass", 
+        "water"
+    ],
+    "StrongDefense" : [ 
+        "fire", 
+        "ice", 
+        "steel", 
+        "water"
+    ],
+    "WeakDefense" : [ 
+        "electric", 
+        "grass"
+    ],
+    "ImmuneDefense" : []
+}
+
+
+{
+    "ElementType" : "normal",
+    
+    "StrongAttack" : [],
+    "WeakAttack" : [ 
+        "rock", 
+        "steel"
+    ],
+    "StrongDefense" : [],
+    "WeakDefense" : [ 
+        "fighting"
+    ],
+    "ImmuneDefense" : [ 
+        "ghost"
+    ]
+}
+
+
+{
+    "ElementType" : "fire",
+    
+    "StrongAttack" : [ 
+        "grass", 
+        "bug", 
+        "ice", 
+        "steel"
+    ],
+    "WeakAttack" : [ 
+        "dragon", 
+        "fire", 
+        "rock", 
+        "water"
+    ],
+    "StrongDefense" : [ 
+        "bug", 
+        "fairy", 
+        "fire", 
+        "grass", 
+        "ice", 
+        "steel"
+    ],
+    "WeakDefense" : [ 
+        "ground", 
+        "rock", 
+        "water"
+    ],
+    "ImmuneDefense" : []
+}
+
+
+{
+    "ElementType" : "grass",
+    
+    "StrongAttack" : [ 
+        "ground", 
+        "rock", 
+        "water"
+    ],
+    "WeakAttack" : [ 
+        "bug", 
+        "dragon", 
+        "fire", 
+        "flying", 
+        "grass", 
+        "poison", 
+        "steel"
+    ],
+    "StrongDefense" : [ 
+        "electric", 
+        "grass", 
+        "ground", 
+        "water"
+    ],
+    "WeakDefense" : [ 
+        "bug", 
+        "fire", 
+        "flying", 
+        "ice", 
+        "poison"
+    ],
+    "ImmuneDefense" : []
+}
+
+
+{
+    "ElementType" : "steel",
+    
+    "StrongAttack" : [ 
+        "fairy", 
+        "ice", 
+        "rock"
+    ],
+    "WeakAttack" : [ 
+        "electric", 
+        "fire", 
+        "steel", 
+        "water"
+    ],
+    "StrongDefense" : [ 
+        "bug", 
+        "dragon", 
+        "fairy", 
+        "flying", 
+        "grass", 
+        "ice", 
+        "normal", 
+        "psychic", 
+        "rock", 
+        "steel"
+    ],
+    "WeakDefense" : [ 
+        "fighting", 
+        "fire", 
+        "ground"
+    ],
+    "ImmuneDefense" : [ 
+        "poison"
+    ]
+}
+
+
+{
+    "ElementType" : "bug",
+    
+    "StrongAttack" : [ 
+        "dark", 
+        "grass", 
+        "psychic"
+    ],
+    "WeakAttack" : [ 
+        "fairy", 
+        "fighting", 
+        "fire", 
+        "flying", 
+        "ghost", 
+        "poison", 
+        "steel"
+    ],
+    "StrongDefense" : [ 
+        "fighting", 
+        "grass", 
+        "ground"
+    ],
+    "WeakDefense" : [ 
+        "fire", 
+        "flying", 
+        "rock"
+    ],
+    "ImmuneDefense" : []
+}
+
+
+{
+    "ElementType" : "fighting",
+    
+    "StrongAttack" : [ 
+        "dark", 
+        "ice", 
+        "normal", 
+        "rock", 
+        "steel"
+    ],
+    "WeakAttack" : [ 
+        "bug", 
+        "fairy", 
+        "flying", 
+        "poison", 
+        "psychic"
+    ],
+    "StrongDefense" : [ 
+        "bug", 
+        "dark", 
+        "rock"
+    ],
+    "WeakDefense" : [ 
+        "fairy", 
+        "flying", 
+        "psychic"
+    ],
+    "ImmuneDefense" : []
+}
+
+
+{
+    "ElementType" : "rock",
+    
+    "StrongAttack" : [ 
+        "bug", 
+        "fire", 
+        "flying", 
+        "ice"
+    ],
+    "WeakAttack" : [ 
+        "fighting", 
+        "ground", 
+        "steel"
+    ],
+    "StrongDefense" : [ 
+        "fire", 
+        "flying", 
+        "normal", 
+        "poison"
+    ],
+    "WeakDefense" : [ 
+        "fighting", 
+        "grass", 
+        "ground", 
+        "steel", 
+        "water"
+    ],
+    "ImmuneDefense" : []
+}

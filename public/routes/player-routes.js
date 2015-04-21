@@ -1,7 +1,7 @@
 var base = '/player',
       express = require('express'),
       router = express.Router(),
-      playerConnection = require('./connections/playerconnection');
+      playerConnection = require('../connections/playerconnection');
 
 router.get('/getplayerposition\?:playerName', function(req, res) {
     var name = req.query.playerName;

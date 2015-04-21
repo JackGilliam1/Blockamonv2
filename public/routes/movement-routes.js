@@ -2,8 +2,8 @@
 var base = '/movement',
       express = require('express'),
       router = express.Router(),
-      keyMappings = require('./settings/keymappings'),
-      movementConnection = require('./connections/movementconnection');
+      keyMappings = require('../settings/keymappings'),
+      movementConnection = require('../connections/movementconnection');
       
 router.post('/buttonpushed', function(req, res) {
     var keysPressed = req.body.keys,

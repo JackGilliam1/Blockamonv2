@@ -2,9 +2,7 @@ var Blockamon = require('./schemas/blockamonModel');
        
 module.exports = {
    loadBlockamon: function(playerName, blockamonLoaded) {
-        Blockamon.find()
-            .where('owner').equals(playerName)
-            .exec(function(err, blockamon) {
+        Blockamon.find({ owner: playerName }, function(err, blockamon) {
                if(err || !blockamon || blockamon.length === 0) {
                     blockamonLoaded([]);
                     return console.error(err);
@@ -13,16 +11,29 @@ module.exports = {
             });
    },
     loadBlockamon: function(blockamonId, blockamonLoaded) {
-       Blockamon.findById(blockamon.id, function(err, blockamon) {
+       Blockamon.findById(blockamonId, function(err, blockamon) {
            if(err) {
                blockamonLoaded(undefined);
-               return console.log(err);
+               return console.error(err);
            }
            blockamonLoaded(blockamon);
        });
     },
    saveBlockamon: function(blockamon, blockamonSaved) {
-        Blockamon.saveBlockamon(blockamon, blockamonSaved);
+        this.loadBlockamon(blockamon.id, function(loadedBlockamon) {
+            var blockProp;
+            for(blockProp in blockamon) {
+                if(blockProp !== 'id') {
+                    loadedBlockamon[blockProp] = blockamon[blockProp];
+                }
+            }
+            loadedBlockamon.save(loadedBlockamon, function(err, saved) {
+                if(err) {
+                    console.error(err);
+                }
+                blockamonSaved(saved);
+            });
+        });
    },
     updateBlockamon: function(blockamon, blockamonUpdated) {
         blockamon.forEach(function(block) {

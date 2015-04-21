@@ -33,20 +33,15 @@ define('blockamon', ['react', 'jquery'], function(React, $){
         render: function() {
             var elementType = this.props.elementType,
                   position = this.state.position,
-                  blockamonStyle = {
-                    position: 'relative',
-                    //left: '500px',
-                    //top: '400px',
-                  },
                   blockamonImageStyle = {
                     transform: 'rotate(' + (this.state.position.rotation) + 'deg)'
                   };
               
             return (
                 <span id="activeFieldBlockamon"
-                          className="active blockamon"
-                          style={blockamonStyle}>
-                    <span className={"blockamonimage " + elementType + " " + position.direction} style={blockamonImageStyle}></span>
+                          className="active blockamon">
+                    <span className={"blockamonimage " + elementType + " " + position.direction} style={blockamonImageStyle}>
+                    </span>
                 </span>
             );
         }

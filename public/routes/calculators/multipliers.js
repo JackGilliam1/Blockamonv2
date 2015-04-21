@@ -1,4 +1,4 @@
-var ElementTypeAttribute = require('../connections/schemas/elementTypeAttributeModel'),
+var ElementTypeAttribute = require('elementTypeAttributeModel'),
        multiplierValues = require('multipliervalues'),
        elementAttributes = {
            elementTypeAttributes: [],

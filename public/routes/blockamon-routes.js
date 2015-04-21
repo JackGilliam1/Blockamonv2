@@ -1,9 +1,10 @@
 var base = '/blockamon',
       express = require('express'),
       router = express.Router(),
-      playerConnection = require('./connections/playerconnection'),
-      objectDimensions = require('./settings/objectDimensions'),
-      gameVariables = require('./settings/gamevariables'),
+      playerConnection = require('../connections/playerconnection'),
+      objectDimensions = require('../settings/objectDimensions'),
+      gameVariables = require('../settings/gamevariables'),
+      blockamonCreator = require('./blockamoncreator'),
       playerDimensions = objectDimensions.player,
       blockamonDimensions = objectDimensions.blockamon,
       lastBlockamonPosition;
@@ -89,10 +90,6 @@ router.get('/getactiveblockamonposition\?:playerName',
             });
             res.end();
         });
-      
-router.get('/getstarterblockamon\?:playerName', function(req, res) {
-    
-});
     
 module.exports = router;
       

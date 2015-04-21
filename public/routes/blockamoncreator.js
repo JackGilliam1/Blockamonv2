@@ -1,5 +1,6 @@
-var types = require('./settings/blockamontypes'),
-       Blockamon = require('./connections/schemas/blockamonModel'),
+var types = require('../settings/blockamontypes'),
+       Blockamon = require('../connections/schemas/blockamonModel'),
+       blockamonConnection = require('../connections/blockamonconnection'),
        healthBuffer = 100,
        healthBase = 50,
        attackBuffer = 10,
@@ -8,17 +9,18 @@ var types = require('./settings/blockamontypes'),
        defenseBase = 5;
 
 module.exports = {
-    getNew: function(baseLevel) {
+    getNew: function(baseLevel, playerName, blockamonCreated) {
         var type = types.getRandomType(),
                health = Math.floor(Math.random() * healthBuffer) + healthBase,
                attack = Math.floor(Math.random() * attackBuffer) + attackBase,
                defense = Math.floor(Math.random() * defenseBuffer) + defenseBase,
                level = Math.floor((Math.random() * ((baseLevel + 5) - baseLevel)) + baseLevel);
                
-        return new Blockamon({
+        new Blockamon({
            name: type,
+           owner: playerName,
            stats: {
-                        type: type,
+                        elementType: type,
                         level: level,
                         totalHealth: health,
                         currentHealth: health,
@@ -31,6 +33,12 @@ module.exports = {
                 three: undefined,
                 four: undefined
             }
+        })
+        .save(function(err, savedBlockamon) {
+                if(err) {
+                    return console.error(err);
+                }
+                blockamonConnection.loadBlockamon(savedBlockamon.id, blockamonCreated);
         });
     }
 };

@@ -1,3 +1,4 @@
+require('main.scss');
 require('grass.scss');
 define('gamearea', [
      'react',
@@ -6,9 +7,9 @@ define('gamearea', [
      './player',
      './blockamon',
      './grass',
-     '../../routes/settings/keymappings'
+     './battlebubble'
  ],
- function(React, $, store, Player, Blockamon, Grass, keyMappings) {
+ function(React, $, store, Player, Blockamon, Grass, BattleBubble) {
     
     var Index = React.createClass({
         getInitialState: function() {
@@ -17,47 +18,6 @@ define('gamearea', [
             return {
                player:  { name: playerName }
             };
-        },
-        keysPressed: {},
-        doKeyDown: function(e) {
-            if(keyMappings.containsKey(e.keyCode)) {
-                e.preventDefault();
-            }
-            else {
-                return;
-            }
-            this.keysPressed[e.keyCode] = true;
-            this.sendKeys(Object.keys(this.keysPressed));
-        },
-        doKeyUp: function(e) {
-            delete this.keysPressed[e.keyCode];
-            if(!keyMappings.containsKey(e.keyCode)) {
-                return;
-            }
-            this.sendKeys(Object.keys(this.keysPressed));
-        },
-        sendKeys: function(keys) {
-            var self = this;
-            if(keys.length > 0) {
-                $.ajax({
-                    url: '/movement/buttonpushed',
-                    type: 'POST',
-                    data: {
-                        keys: keys,
-                        playerName: this.state.player.name
-                    },
-                    success: function(player) {
-                        self.setState({
-                            player: player
-                        });
-                        self.refs.activeBlockamon.playerMoved();
-                    }
-                });
-            }
-        },
-        componentDidMount: function() {
-           $(document).keydown(this.doKeyDown);
-           $(document).keyup(this.doKeyUp);
         },
         componentWillMount: function() {
             var self = this;
@@ -73,8 +33,11 @@ define('gamearea', [
                 }
             });
         },
-        componentDidUpdate: function() {
-            React.findDOMNode(this.refs.gameArea).focus();
+        playerMoved: function(player) {
+            this.refs.activeBlockamon.playerMoved();
+            this.setState({
+                player: player
+            });
         },
         playerNameChanged: function(oldName, newName) {
             var self = this;
@@ -91,17 +54,21 @@ define('gamearea', [
             });
         },
         render: function() {
-            var playerName = this.state.player.name;
+            var player = this.state.player;
             
             return (
                 <div id="content">
                     <div id="gameArea"
                         ref="gameArea"
                         className={"gamearea grass"}>
-                        <Player ref="player" name={playerName}
-                            playerNameChanged={this.playerNameChanged} />
-                        <Blockamon ref="activeBlockamon" elementType={"bug"} playerName={playerName} />
+                        <Player ref="player" name={player.name}
+                            nameChanged={this.playerNameChanged}
+                            onMove={this.playerMoved}/>
+                        <Blockamon ref="activeBlockamon" elementType={"bug"} playerName={player.name} />
                         <Grass ref="grassOne" width={30} height={100} x={0} y={0} />
+                        <div id="battleArena">
+                            <BattleBubble ref="battleBubble" player={player} />
+                        </div>
                     </div>
                 </div>
             );

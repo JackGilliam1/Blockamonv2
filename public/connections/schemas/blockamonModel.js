@@ -1,10 +1,9 @@
 var mongoose = require('mongoose'),
-      Move = require('./moveModel'),
       blockamonSchema = new mongoose.Schema({
         owner: String,
         name: String,
         stats: {
-                     type: String,
+                     elementType: String,
                      level: Number,
                      totalHealth: Number,
                      currentHealth: Number,
