@@ -16,7 +16,8 @@ define('gamearea', [
             var playerNameStore = store.get('playerName');
             var playerName = playerNameStore ? playerNameStore.name : 'test';
             return {
-               player:  { name: playerName }
+               player:  { name: playerName },
+               battleState: { inBattle: false }
             };
         },
         componentWillMount: function() {
@@ -38,6 +39,18 @@ define('gamearea', [
             this.setState({
                 player: player
             });
+            
+            $.ajax({
+                url: '/battle/getplayerbattlestate',
+                type: 'GET',
+                dataType: 'json',
+                data: { playerName: playerName },
+                success: function(data) {
+                    self.setState({
+                        battleState: data.battleState
+                    });
+                }
+            });
         },
         playerNameChanged: function(oldName, newName) {
             var self = this;
@@ -54,21 +67,22 @@ define('gamearea', [
             });
         },
         render: function() {
-            var player = this.state.player;
+            var player = this.state.player,
+                   playerInBattle = this.state.battleState.inBattle || false;
             
             return (
                 <div id="content">
                     <div id="gameArea"
                         ref="gameArea"
                         className={"gamearea grass"}>
+                        { playerInBattle ?  <div id="battleArena">
+                                                        <BattleBubble ref="battleBubble" player={player} />
+                                                    </div> : null }
                         <Player ref="player" name={player.name}
                             nameChanged={this.playerNameChanged}
                             onMove={this.playerMoved}/>
                         <Blockamon ref="activeBlockamon" elementType={"bug"} playerName={player.name} />
                         <Grass ref="grassOne" width={30} height={100} x={0} y={0} />
-                        <div id="battleArena">
-                            <BattleBubble ref="battleBubble" player={player} />
-                        </div>
                     </div>
                 </div>
             );

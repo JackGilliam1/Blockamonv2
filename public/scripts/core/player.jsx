@@ -9,7 +9,8 @@ define('player', [
 function(React, $, PlayerImage, PlayerNameEdit, keyMappings) {
     return React.createClass({
         propTypes: {
-           name: React.PropTypes.string.isRequired 
+           name: React.PropTypes.string.isRequired,
+           inBattle: React.PropTypes.bool.isRequired
         },
         getDefaultProps: function() {
            return {
@@ -20,7 +21,8 @@ function(React, $, PlayerImage, PlayerNameEdit, keyMappings) {
             return {
                 ownedBlockamon: [],
                 position: { x: 0, y: 0, direction: 'none' },
-                isEditing: false
+                isEditing: false,
+                inBattle: false
             };
         },
         keysPressed: {},
@@ -48,6 +50,9 @@ function(React, $, PlayerImage, PlayerNameEdit, keyMappings) {
             this.sendKeys(Object.keys(this.keysPressed));
         },
         sendKeys: function(keys) {
+            if(this.props.inBattle) {
+                return;
+            }
             var self = this;
             if(keys.length > 0) {
                 $.ajax({
@@ -100,19 +105,23 @@ function(React, $, PlayerImage, PlayerNameEdit, keyMappings) {
            });
         },
         rename: function(e) {
+            if(this.props.inBattle) {
+                return;
+            }
             this.setState({
                 isEditing: true
             });
         },
         render: function() {
             var playerName = this.props.name,
+                  inBattle = this.props.inBattle || false,
                   position = this.state.position;
                   playerStyle = {
                       position: 'relative',
                       left: position.x+ 'px',
                       top: position.y + 'px'
                   },
-                  editing = this.state.isEditing,
+                  editing = this.state.isEditing && !inBattle,
                   onBlur = this.props.onBlur;
             
             return (
@@ -120,8 +129,7 @@ function(React, $, PlayerImage, PlayerNameEdit, keyMappings) {
                     className="player"
                     style={playerStyle}
                     onClick={this.rename}>
-                    { editing ? null : <PlayerImage direction={position.direction}/> }
-                    { editing ? <PlayerNameEdit name={playerName} playerNameUpdated={this.playerNameUpdated} doneEditing={this.doneEditing} /> : null }
+                    { editing ? <PlayerNameEdit name={playerName} playerNameUpdated={this.playerNameUpdated} doneEditing={this.doneEditing} /> : <PlayerImage direction={position.direction}/> }
                 </span>
             );
         }

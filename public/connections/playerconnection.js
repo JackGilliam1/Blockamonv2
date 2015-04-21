@@ -30,7 +30,8 @@ module.exports = {
                                                 name: playerName,
                                                 position: { x: 0, y: 0, direction: 'left' },
                                                 money: 0,
-                                                ownedBlockamon: []
+                                                ownedBlockamon: [],
+                                                inBattle: false
                                                });
         blockamonCreator.getNew(1, playerName, function(blockamon) {
             player.ownedBlockamon.push(blockamon.id);
@@ -41,20 +42,6 @@ module.exports = {
                 self.getPlayer(playerName, playerLoaded);
             });
         });
-        return;
-    },
-    updatePlayer: function(player, playerUpdated) {
-        var self = this;
-        Player.findByIdAndUpdate(player.id,
-                  player,
-                  undefined,
-                  function(err, updatedPlayer) {
-                      if(err) {
-                          playerUpdated(undefined);
-                          return console.log(err);
-                      }
-                      playerUpdated(updatedPlayer);
-                  });
     },
     updatePlayerBlockamonOwner: function(playerName, playerBlockamon) {
         var i;
@@ -70,22 +57,33 @@ module.exports = {
                 });
         }
     },
+    updatePlayerBattleState: function(playerName, inBattle, battleStateUpdated) {
+       var self = this;
+       this.getPlayer(playerName, function(player) {
+           player.inBattle = inBattle;
+           self.updatePlayer(player, battleStateUpdated);
+       });
+    },
     updatePlayerName: function(oldName, newName, playerUpdated) {
         var self = this;
         this.getPlayer(oldName, function(player) {
             player.name = newName;
             self.updatePlayerBlockamonOwner(newName, player.ownedBlockamon);
-            Player.findByIdAndUpdate(player.id,
-                player,
-                undefined, 
-                function(err, savedPlayer) {
-                    if(err) {
-                        playerUpdated(savedPlayer);
-                        return console.log(err);
-                    }
-                    self.player = savedPlayer;
-                    playerUpdated(savedPlayer);
-                });
+            self.updatePlayer(player, playerUpdated);
         });
+    },
+    updatePlayer: function(player, playerUpdated) {
+        var self = this;
+        Player.findByIdAndUpdate(player.id,
+            player,
+            undefined, 
+            function(err, savedPlayer) {
+                if(err) {
+                    playerUpdated(savedPlayer);
+                    return console.log(err);
+                }
+                self.player = savedPlayer;
+                playerUpdated(savedPlayer);
+            });
     }
 };

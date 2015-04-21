@@ -3,7 +3,8 @@ var mongoose = require('mongoose'),
         name: String,
         money: Number,
         position: { x: Number, y: Number, direction: String },
-        ownedBlockamon: [{type: mongoose.Schema.Types.ObjectId, ref: 'Blockamon'}]
+        ownedBlockamon: [{type: mongoose.Schema.Types.ObjectId, ref: 'Blockamon'}],
+        inBattle: Boolean
       });
       
 module.exports = mongoose.model('Player', playerSchema);
