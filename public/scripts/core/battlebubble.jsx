@@ -3,21 +3,15 @@ define('core/battlebubble', ['react', './battlebubblehealthbar', './battleaction
  function(React, BattleBubbleHealthbar, BattleActions) {
     var battleBubble = React.createClass({
         propTypes: {
-            player: React.PropTypes.object.isRequired,
-            onAttack: React.PropTypes.func.isRequired,
-            onItem: React.PropTypes.func.isRequired,
-            onRun: React.PropTypes.func.isRequired
+            player: React.PropTypes.object.isRequired
         },
         render: function() {
-            var player = this.props.player,
-                  onAttack = this.props.onAttack,
-                  onItem = this.props.onItem,
-                  onRun = this.props.onRun;
+            var player = this.props.player;
             
             return (
                 <span id="battleBubble" className="bubble">
                     <BattleBubbleHealthbar player={player} />
-                    <BattleActions onAttack={onAttack} onItem={onItem} onRun={onRun} />
+                    <BattleActions />
                 </span>
             );
         }

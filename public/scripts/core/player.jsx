@@ -4,13 +4,13 @@ define('player', [
         'jquery',
         './playerimage',
         './playernameedit',
-        'keymappings'
+        'keymappings',
+        './event-aggregator'
      ],
-function(React, $, PlayerImage, PlayerNameEdit, keyMappings) {
+function(React, $, PlayerImage, PlayerNameEdit, keyMappings, ea) {
     return React.createClass({
         propTypes: {
-           name: React.PropTypes.string.isRequired,
-           inBattle: React.PropTypes.bool.isRequired
+           name: React.PropTypes.string.isRequired
         },
         getDefaultProps: function() {
            return {
@@ -50,7 +50,7 @@ function(React, $, PlayerImage, PlayerNameEdit, keyMappings) {
             this.sendKeys(Object.keys(this.keysPressed));
         },
         sendKeys: function(keys) {
-            if(this.props.inBattle) {
+            if(this.state.inBattle) {
                 return;
             }
             var self = this;
@@ -66,10 +66,13 @@ function(React, $, PlayerImage, PlayerNameEdit, keyMappings) {
                         self.setState({
                             position: player.position
                         });
-                        self.props.onMove(player);
+                        ea.trigger('playerMoved', player);
                     }
                 });
             }
+        },
+        componentWillMount: function() {
+           ea.addListener('updateBattleState', this.updateBattleState);
         },
         componentDidMount: function() {
            $(document).keydown(this.doKeyDown).keyup(this.doKeyUp);
@@ -104,8 +107,13 @@ function(React, $, PlayerImage, PlayerNameEdit, keyMappings) {
                isEditing: false
            });
         },
+        updateBattleState: function(battleState) {
+           this.setState({
+                inBattle: battleState.inBattle
+           });
+        },
         rename: function(e) {
-            if(this.props.inBattle) {
+            if(this.state.inBattle) {
                 return;
             }
             this.setState({
@@ -114,7 +122,7 @@ function(React, $, PlayerImage, PlayerNameEdit, keyMappings) {
         },
         render: function() {
             var playerName = this.props.name,
-                  inBattle = this.props.inBattle || false,
+                  inBattle = this.state.inBattle,
                   position = this.state.position;
                   playerStyle = {
                       position: 'relative',

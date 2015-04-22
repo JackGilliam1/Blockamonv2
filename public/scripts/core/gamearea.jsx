@@ -7,10 +7,11 @@ define('gamearea', [
      './player',
      './blockamon',
      './grass',
-     './battlebubble'
+     './battlebubble',
+     './event-aggregator'
  ],
- function(React, $, store, Player, Blockamon, Grass, BattleBubble) {
-    
+ function(React, $, store, Player, Blockamon, Grass, BattleBubble, ea) {
+     
     var Index = React.createClass({
         getInitialState: function() {
             var playerNameStore = store.get('playerName');
@@ -33,8 +34,10 @@ define('gamearea', [
                     });
                 }
             });
+            ea.addListener('playerMoved', self.playerMoved);
         },
         playerMoved: function(player) {
+            console.log('player moved it');
             this.refs.activeBlockamon.playerMoved();
             this.setState({
                 player: player
@@ -44,11 +47,12 @@ define('gamearea', [
                 url: '/battle/getplayerbattlestate',
                 type: 'GET',
                 dataType: 'json',
-                data: { playerName: playerName },
+                data: { playerName: player.name },
                 success: function(data) {
                     self.setState({
                         battleState: data.battleState
                     });
+                    ea.trigger('updateBattleState', data.battleState);
                 }
             });
         },
@@ -79,8 +83,7 @@ define('gamearea', [
                                                         <BattleBubble ref="battleBubble" player={player} />
                                                     </div> : null }
                         <Player ref="player" name={player.name}
-                            nameChanged={this.playerNameChanged}
-                            onMove={this.playerMoved}/>
+                            nameChanged={this.playerNameChanged}/>
                         <Blockamon ref="activeBlockamon" elementType={"bug"} playerName={player.name} />
                         <Grass ref="grassOne" width={30} height={100} x={0} y={0} />
                     </div>

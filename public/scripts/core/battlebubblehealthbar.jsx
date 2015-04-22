@@ -1,34 +1,22 @@
 require('styles/battlebubblehealthbar.scss');
-define('core/battlebubblehealthbar', ['react'],
-function(React) {
+define('core/battlebubblehealthbar', ['react', './event-aggregator'],
+function(React, ea) {
     var healthbar = React.createClass({
         getInitialState: function() {
            return {
-                totalHealth: 50,
-                currentHealth: 20
+                totalHealth: 1,
+                currentHealth: 1
            };
         },
-        increase: function() {
-            var currentHealth = this.state.currentHealth + 2;
-            if(currentHealth > this.state.totalHealth) {
-                currentHealth = this.state.totalHealth;
-            }
-            this.setState({
-                currentHealth: currentHealth
-            });
+        updateHealthStats: function(healthData) {
+            
         },
-        decrease: function() {
-            var currentHealth = this.state.currentHealth - 2;
-            if(currentHealth <= 0) {
-                currentHealth = 1;
-            }
-            this.setState({
-                currentHealth: currentHealth
-            });
+        componentWillMount: function() {
+            ea.addListener('updateHealth', this.updateHealthStats);
         },
         render: function() {
-            var totalHealth = this.state.totalHealth || 50,
-                   currentHealth = this.state.currentHealth || 20,
+            var totalHealth = this.state.totalHealth || 1,
+                   currentHealth = this.state.currentHealth || 1,
                    healthbarSize = (currentHealth/totalHealth) * 100,
                    style = { width: healthbarSize + '%' },
                    status = healthbarSize < 50 ? (healthbarSize < 20 ? 'danger' : 'warning') : 'good';

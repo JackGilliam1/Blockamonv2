@@ -8,7 +8,8 @@ var express = require('express'),
       bodyParser = require('body-parser'),
       movementRoutes = require(baseFolder + '/routes/movement-routes'),
       playerRoutes = require(baseFolder + '/routes/player-routes'),
-      blockamonRoutes = require(baseFolder + '/routes/blockamon-routes');
+      blockamonRoutes = require(baseFolder + '/routes/blockamon-routes'),
+      battleRoutes = require(baseFolder + '/routes/battle-routes');
 
 var server = express();
 
@@ -20,6 +21,7 @@ server.use(bodyParser.urlencoded({ extended: true }));
 server.use('/movement', movementRoutes);
 server.use('/player', playerRoutes);
 server.use('/blockamon', blockamonRoutes);
+server.use('/battle', battleRoutes);
 
 server.get('/', function(req, res) {
     res.sendFile(baseFolder + '/views/index.html');
